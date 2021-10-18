@@ -149,6 +149,8 @@ Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan
     
     Nilai korelasinya dapat dilihat pada tabel berikut.
     
+    *ps : Hasil ini tidak akan selalu sama*.
+    
     ![Tabel korelasi](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/korelasi.JPG)
     - Dari tabel korelasi diatas, dapat dilihat bahwa `sqft_living` mempunyai hubungan linear positif yang sangat kuat dengan `price` jika dibandingkan yang lain.
     - Nilai korelasi `yr_built` hampir mendekati nol yang menandakan bahwa usia rumah tidak mempengaruhi pada harga rumah.
@@ -197,7 +199,7 @@ Hasilnya sebagai berikut.
  [Hasil MLR]()
 
 Dari nilai m dan b diatas, kalau dimasukan ke dalam rumus menjadi:
-Y = -47486.81x1 + 63376.06x2 + 185.37x3 + 132226.39x4 - 3966.85x5 + 7009990
+Y = -49110.86x1 + 62897.89x2 + 183.65x3 + 131451.54x4 - 4075.54x5 + 7217062
 
 Kemudian, kita cari tahu accuracy score dari model kita menggunakan testing data yang sudah displit. Gunakan kode berikut.
 ```
@@ -205,11 +207,12 @@ lin_reg.score(x_test, y_test)
 ```
 
 Hasilnya seperti berikut.
+
 *ps : Hasil ini tidak akan selalu sama*.
  
 [Hasil Akurasi]()
 
-Model kita mendapatkan accuracy score sebesar 61.29%
+Model kita mendapatkan accuracy score sebesar 61.01%
 
 Terakhir mari kita prediksi harga rumah sesuai dengan permintaan seseorang, sebut saja namanya Samuel dengan kriteria sebagai berikut:
 - bedrooms = 3
@@ -227,7 +230,7 @@ Hasilnya,
 
 [Harga Prediksi]()
 
-Maka Harga rumah idaman Samuel adalah sekitar US$ 359484
+Maka Harga rumah idaman Samuel adalah sekitar US$ 335936
 
 
 **---Ini adalah bagian akhir laporan---**
