@@ -194,11 +194,11 @@ coef
 ```
 
 Hasilnya sebagai berikut.
-*ps : Hasil ini tidak akan selalu sama*.
 
- [Hasil MLR]()
+![Dataframe MLR](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/dataframe.JPG)
 
 Dari nilai m dan b diatas, kalau dimasukan ke dalam rumus menjadi:
+
 Y = -49110.86x1 + 62897.89x2 + 183.65x3 + 131451.54x4 - 4075.54x5 + 7217062
 
 Kemudian, kita cari tahu accuracy score dari model kita menggunakan testing data yang sudah displit. Gunakan kode berikut.
@@ -208,9 +208,7 @@ lin_reg.score(x_test, y_test)
 
 Hasilnya seperti berikut.
 
-*ps : Hasil ini tidak akan selalu sama*.
- 
-[Hasil Akurasi]()
+![Skor Akurasi](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/akurasi.JPG)
 
 Model kita mendapatkan accuracy score sebesar 61.01%
 
@@ -219,6 +217,7 @@ Terakhir mari kita prediksi harga rumah sesuai dengan permintaan seseorang, sebu
 - bathrooms = 2
 - sqft_living = 1800 sqft
 - yr_built = 1990
+
 Masukkan kode berikut.
 ```
 #Prediksi harga rumah idaman Samuel
@@ -226,11 +225,11 @@ lin_reg.predict([[3,2,1800,7,1990]])
 ```
 
 Hasilnya,
-*ps : Hasil ini tidak akan selalu sama*.
 
-[Harga Prediksi]()
+![Harga Prediksi Rumah](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/harga.JPG)
 
 Maka Harga rumah idaman Samuel adalah sekitar US$ 335936
 
+*ps : Semua hasil dari pemodelan ini tidak akan selalu sama untuk tiap kali dijalankan*.
 
 **---Ini adalah bagian akhir laporan---**
