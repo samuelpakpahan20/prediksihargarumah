@@ -34,13 +34,6 @@ Untuk pembuatan model dipilih penggunaan model dengan algoritma **Multiple Linea
 
 ![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
 
-*Keterangan:*
-- Y = dependent variable
-- mn = koefisien dari persamaan
-- xn = independent variable
-- b = intercept
-- e = error
-
 Selain itu, berikut ini merupakan kelebihan dan kekurangan dari algoritma Multiple Linear Regression:
 - Kelebihan :
   - Mudah dipahami dan mudah digunakan
@@ -106,82 +99,72 @@ Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data :
 
 Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan **Exploratory Data Analysis** **_(EDA)_** dengan dua cara, yakni Univariate dan Multivariate Analysis.
 
--   Model _baseline_
+### Univariate Analysis
 
-    Pada tahap ini saya membuat model dasar dengan menggunakan _modul_ scikit-learn yakni [KNeighborsClassifier](https://scikit-learn.org/0.24/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) tanpa menggunakan parameter tambahan. Lalu melakukan prediksi kepada data ujinya.
+-   Distribusi `bedrooms`
 
--   Model yang dikembangkan
+    ![Distribusi Bedrooms](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/bedrooms.JPG)
+    - Dapat dilihat bahwa sebagian besar jumlah kamar tidur itu di angka 3 dan 4.
+    - Data memiliki banyak outliers.
 
-    Kemudian setelah melihat kinerja model _baseline_, agar dapat bekerja lebih optimal lagi maka digunakan sebuah fungsi untuk mencari _hyperparameter_ yang optimal dengan [HalvingGridSearchCV](https://scikit-learn.org/0.24/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV). Setelah ditemukan yang optimal, kemudian _hyperparameter_ tersebut diterapkan ke model _baseline_.
 
-Hasilnya dapat dilihat seperti pada tabel berikut ini :
+-   Distribusi `bathrooms`
 
-![performa model](https://user-images.githubusercontent.com/58651943/133832133-83717305-7a38-4c33-b206-91fa519d0e19.png)
+    ![Distribusi Bathrooms](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/bathrooms.JPG)
+    - Jumlah kamar mandi paling banyak berada pada angka 1 dan 2.
+    - Kemudian, terdapat rumah yang tidak ada kamar mandinya atau jumlahnya 0
+    - Nilai outliernya lumayan banyak.
 
-Pada model _baseline_ nilai akurasinya cukup buruk. Begitupun nilai _f1-score_, _recall_ dan _precision_ pada setiap labelnya. Namun setelah dilakukan pengaturan _hyperparameter_, nilai akurasi pun meningkat. Begitupun nilai _f1-score_, _recall_ dan _precision_ pada setiap labelnya. Untuk membuktikannya, kedua model tersebut diuji pada data uji dan di visualisasikan pada _confussion matrix_ seperti berikut.
 
--   Model _baseline_
+-   Distribusi `sqft_living`
 
-![performa model baseline](https://user-images.githubusercontent.com/58651943/133832795-a6cc120e-1153-42d3-967f-a0a22df4c9e3.png)
+    ![Distribusi Living Room](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/livingroom.JPG)
+    - Density dari distribusi luas rumah berada di sekitar angka 2000an.
+    - Banyak terdapat outliers.
 
--   Model yang dikembangkan
 
-![performa model improvement](https://user-images.githubusercontent.com/58651943/133833185-32e102f2-6d81-4f00-b06b-b8f3c7313903.png)
+-   Distribusi `grade`
 
-Dengan hasil diatas, maka model yang dikembangkan merupakan model yang dipilih untuk digunakan.
+    ![Distribusi Grade](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/grade.JPG)
+    - Sebagian besar rumah di County King US memiliki grade 7 dan 8.
+    - Dilihat dari boxplot, data memiliki beberapa outliers.
+
+
+-   Distribusi `yr_built`
+
+    ![Distribusi Tahun](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/year.JPG)
+    - Dapat dilihat bahwa semakin tua umur dari rumah, maka semakin sedikit orang yang menjual rumahnya tersebut.
+    - Density terdapat di sekitar tahun 1980an.
+    - Data tidak memiliki outliers.
+
+### Multivariate Analysis
+
+-   Hubungan antara variabel independent dan variabel dependent
+
+    Perlu diingat : 
+    - Independent variabel (x) adalah `bedrooms`, `bathrooms`, `sqft_living`, `grade`, dan `yr_built`.
+    - Dependent variabel (y) adalah `price`.
+    
+    ![Plot variabel](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/multivariate.JPG)
+    
+    Nilai korelasinya dapat dilihat pada tabel berikut.
+    
+    ![Tabel korelasi](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/korelasi.JPG)
+    - Dari tabel korelasi diatas, dapat dilihat bahwa `sqft_living` mempunyai hubungan linear positif yang sangat kuat dengan `price` jika dibandingkan yang lain.
+    - Nilai korelasi `yr_built` hampir mendekati nol yang menandakan bahwa usia rumah tidak mempengaruhi pada harga rumah.
 
 ## Evaluation
 
-Pada proyek ini, model yang dibuat merupakan kasus klasifikasi dan menggunakan metriks akurasi, _f1-score_, _recall_ dan _precision_. Pada gambar dibawah ini ditampilkan kembali hasil pengukuran model yang dikembangkan dengan metriks akurasi, _f1-score_, _recall_ dan _precision_.
+Seperti yang sudah dijelaskan pada tab [Solution statements](#modeling), pada proyek ini model yang dibuat merupakan kasus prediksi dan menggunakan algoritma **Multiple Linear Regression**. Pada gambar dibawah ini ditampilkan kembali formula dari Multiple Linear Regression / Regresi Linear Berganda.
 
-![performa model improvement eval](https://user-images.githubusercontent.com/58651943/133834417-3d8e57b8-9546-4dc9-b5b7-7f58a1abc4ea.png)
+![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
 
--   Akurasi
+*Keterangan:*
+- Y = dependent variable
+- mn = koefisien dari persamaan
+- xn = independent variable
+- b = intercept
+- e = error
 
-![formula akurasi sklearn](https://user-images.githubusercontent.com/58651943/133834677-91c885d0-a443-4567-b75b-30f106ac8124.png)
-
-Akurasi merupakan metrik untuk menghitung nilai ketepatan model dalam memprediksi data dengan data yang sebenarnya. Akurasi dapat dihitung dengan rumus diatas. Kelebihan dari metriks ini adalah sering digunakan dalam kasus pembuatan model klasifikasi baik itu klasifikasi dua kelas, atau kategori. Kekurangan dari metrik ini adalah dapat bersifat 'menyesatkan' pada data yang tidak seimbang.
-
--   _precision_
-
-_Precision_ merupakan metrik dalam kasus klasifikasi yang digunakan untuk menghitung seberapa baik model memprediksi label positif terhadap semua prediksi model berlabel positif. Lalu bagaimana cara menghitungnya, pertama-tama kita perlu mengenali dulu istilah TP,TN,FP,FN. Penjelasan singkatnya dapat dilihat pada tabel dibawah ini
-
-![tp,tn,fp,fn](https://user-images.githubusercontent.com/58651943/133837008-ce49e685-d592-475e-b6b9-00e007123a47.png)
-
-Setelah memahaminya, kitapun dapat menghitungnya dengan rumus dibawah ini
-
-![formula precision sklearn](https://user-images.githubusercontent.com/58651943/133837478-fe8bb36a-8964-4133-8cad-d7ad308e6bff.png)
-
-Kelebihan dari metriks ini berfokus pada bagaimana performa (prediksi) model terhadap label data positif, kekurangannya metriks ini tidak memperhitungkan label negatifnya.
-
--   _Recall_
-
-_Recall_ merupakan metrik dalam kasus klasifikasi yang digunakan untuk menghitung seberapa baik model memprediksi label positif terhadap semua label data positif. Cara menghitungnya dapat dilihat pada rumus dibawah ini
-
-![formula recall sklearn](https://user-images.githubusercontent.com/58651943/133840605-edcd7b7e-2b82-44fe-8fd8-7acecf754c55.png)
-
-Kelebihan dari metriks ini menghitung bagian negatif dari prediksi label positif (tidak seperti precision). Tetapi kekurangannya ketika semua prediksi = 1 maka _recall_ akan bernilai 1 (tidak memperhitungkan prediksi negatif).
-
--   _f1-score_
-
-_f1-score_ merupakan metrik dalam kasus klasifikasi yang digunakan untuk menghitung seberapa baik hasil prediksi model (_precision_) dan seberapa lengkap hasil prediksinya (_recall_). Cara menghitungnya dapat dilihat pada rumus dibawah ini
-
-![formula f1-score sklearn](https://user-images.githubusercontent.com/58651943/133841853-6482710c-b233-4697-8bd7-2bb709e27eaf.png)
-
-Catatan : Nilai beta = 1 (f1-score)
-
-Kelebihan dari metriks ini menutup semua kekurangan yang ada pada _precision_ dan _recall_. Namun kekurangannya adalah _f1-score_ tidak memperhitungkan hasil prediksi benar pada label negatif.
-
-## _Referensi:_
-
-[[1](https://www.nature.com/articles/s41545-020-00085-z)] Bain, R., Johnston, R. & Slaymaker, T. _Drinking water quality and the SDGs._ npj Clean Water 3, 37 (2020). https://doi.org/10.1038/s41545-020-00085-z
-
-[[2](https://www.sciencedirect.com/science/article/abs/pii/S2214714419304453)] Hasan, H. A., & Muhammad, M. H. (2020). _A review of biological drinking water treatment technologies for contaminants removal from polluted water resources._ Journal of Water Process Engineering, 33, 101035. https://doi.org/10.1016/j.jwpe.2019.101035
-
-[[3](https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761)] Harrison, O. (2019, July 14). _Machine Learning Basics with the K-Nearest Neighbors Algorithm_. Medium. https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761
-
-[[4](https://statisticsbyjim.com/basics/remove-outliers/)] Frost, J. (2021, April 5). _Guidelines for Removing and Handling Outliers in Data._ Statistics By Jim. https://statisticsbyjim.com/basics/remove-outliers/
-
-[[5](https://towardsdatascience.com/tuning-hyperparameters-part-i-successivehalving-c6c602865619)] Descamps, B. (2018, July 3). _Tuning Hyperparameters (part I): SuccessiveHalving._ Medium. https://towardsdatascience.com/tuning-hyperparameters-part-i-successivehalving-c6c602865619
 
 **---Ini adalah bagian akhir laporan---**
