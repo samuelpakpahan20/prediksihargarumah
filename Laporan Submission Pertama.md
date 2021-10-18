@@ -155,7 +155,7 @@ Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan
 
 ## Evaluation
 
-Seperti yang sudah dijelaskan pada tab [Solution statements](#modeling), pada proyek ini model yang dibuat merupakan kasus prediksi dan menggunakan algoritma **Multiple Linear Regression**. Pada gambar dibawah ini ditampilkan kembali formula dari Multiple Linear Regression / Regresi Linear Berganda.
+Seperti yang sudah dijelaskan pada tab [Solution statements](#solution-statements), pada proyek ini model yang dibuat merupakan kasus prediksi dan menggunakan algoritma **Multiple Linear Regression**. Pada gambar dibawah ini ditampilkan kembali formula dari Multiple Linear Regression / Regresi Linear Berganda.
 
 ![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
 
@@ -165,6 +165,69 @@ Seperti yang sudah dijelaskan pada tab [Solution statements](#modeling), pada pr
 - xn = independent variable
 - b = intercept
 - e = error
+
+Setelah kita melakukan data preparation dengan mendapatkan fitur-fitur terbaik serta melihat korelasi antar fitur variable dan fitur target. Selanjutnya, kita akan membuat model menggunakan Algoritma Multiple Linear Regression. Untuk menggunakan algoritma tersebut, masukkan kode berikut:
+```
+# Pertama, buat variabel x dan y
+x = df_features.drop(columns='price')
+y = df_features['price']
+
+# Kedua, kita split data kita menjadi 80% training dan 20% testing
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=4)
+
+# Ketiga, kita bikin object linear regresi
+lin_reg = LinearRegression()
+
+# Keempat, train the model menggunakan training data yang sudah displit
+lin_reg.fit(x_train, y_train)
+
+# Kelima, cari tau nilai slope/koefisien (m) dan intercept (b)
+# Kita coba buat kedalam dataframe agar kebih rapi
+coef_dict = {
+    'features': x.columns,
+    'coef_value':lin_reg.coef_
+}
+coef = pd.DataFrame(coef_dict, columns=['features', 'coef_value'])
+coef
+```
+
+Hasilnya sebagai berikut.
+*ps : Hasil ini tidak akan selalu sama*.
+
+ [Hasil MLR]()
+
+Dari nilai m dan b diatas, kalau dimasukan ke dalam rumus menjadi:
+Y = -47486.81x1 + 63376.06x2 + 185.37x3 + 132226.39x4 - 3966.85x5 + 7009990
+
+Kemudian, kita cari tahu accuracy score dari model kita menggunakan testing data yang sudah displit. Gunakan kode berikut.
+```
+lin_reg.score(x_test, y_test)
+```
+
+Hasilnya seperti berikut.
+*ps : Hasil ini tidak akan selalu sama*.
+ 
+[Hasil Akurasi]()
+
+Model kita mendapatkan accuracy score sebesar 61.29%
+
+Terakhir mari kita prediksi harga rumah sesuai dengan permintaan seseorang, sebut saja namanya Samuel dengan kriteria sebagai berikut:
+- bedrooms = 3
+- bathrooms = 2
+- sqft_living = 1800 sqft
+- yr_built = 1990
+Masukkan kode berikut.
+```
+#Prediksi harga rumah idaman Samuel
+lin_reg.predict([[3,2,1800,7,1990]])
+```
+
+Hasilnya,
+*ps : Hasil ini tidak akan selalu sama*.
+
+[Harga Prediksi]()
+
+Maka Harga rumah idaman Samuel adalah sekitar US$ 359484
 
 
 **---Ini adalah bagian akhir laporan---**
