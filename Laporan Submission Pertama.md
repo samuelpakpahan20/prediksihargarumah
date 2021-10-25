@@ -152,12 +152,12 @@ Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data :
 
 - Mengecek Missing Value.
 
-  ![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
+  ![Data Missing Value](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/missingvalue.JPG)
   
   Namun dataset ini tidak memiliki missing value.
 
 - Melakukan **pembagian dataset** menjadi dua bagian dengan rasio 80% untuk data latih dan 20% untuk data uji.
-  Pada saat pemodelan, kita perlu melakukan pembagian dataset kedalam dua atau tiga bagian. Pada proyek ini dilakukan dua bagian saja yakni pada data latih dan data uji dengan rasio 80:20. Data latih dilakukan sepenuhnya untuk melatih model, sedangkan data uji merupakan data yang belum pernah dilihat oleh model dan diharapkan model dapat memiliki performa yang sama baiknya pada data uji seperti pada data latih. Pada bagian ini dipastikan juga pembagian label kategorikal haruslah sama banyak pada data latih dan data uji. Pembagian dataset dilakukan dengan modul [train_test_split](https://scikit-learn.org/0.24/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split) dari scikit-learn.
+  Pada saat pemodelan, kita perlu melakukan pembagian dataset kedalam dua atau tiga bagian. Pada proyek ini dilakukan dua bagian saja yakni pada data latih dan data uji dengan rasio 80:20. Data latih dilakukan sepenuhnya untuk melatih model, sedangkan data uji merupakan data yang belum pernah dilihat oleh model dan diharapkan model dapat memiliki performa yang sama baiknya pada data uji seperti pada data latih. Pembagian dataset dilakukan dengan modul [train_test_split](https://scikit-learn.org/0.24/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split) dari scikit-learn.
 
 ## Modeling
 
