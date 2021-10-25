@@ -80,24 +80,7 @@ Pada berkas yang diunduh yakni `kc_house_data.csv` berisi informasi data histori
 20. `sqft_living15` : Ukuran area ruang tamu pada tahun 2015
 21. `sqft_lot15` : ukuran area lot pada tahun 2015
 
-## Data Preparation
-
-Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data :
-
-- Dari hasil pengamatan data, dataset ini memiliki banyak kolom tambahan tentang sebuah rumah dan ada beberapa kolom yang kurang berkolerasi dengan kolom `harga`. Jadi, kita hanya pakai kolom `bedrooms`, `bathrooms`, `sqft_living`, `grade`, `price`, dan `yr_built` untuk digunakan sebagai kumpulan fitur terbaiknya.
-
-- Merubah tipe data. 
-  Dari hasil statistical description, dapat diketahui bahwa pada kolom `bathrooms` memiliki nilai pecahan, hal ini sangat aneh jika suatu rumah memiliki jumlah kamar mandi pecahan. Maka tipe datanya diubah dari `float` menjadi `int`.
-
-- Memodifikasi nilai. 
-  Pada kolom `bedrooms` terdapat nilai 33, hal ini sangat aneh karena sebuah rumah pribadi tidak mungkin ada yang mempunyai jumlah kamar 33. Hal ini kemungkinan terjadi karena kesalahan pada saat menginput nilai (typo), jadi kita akan ganti menjadi 3.
-
-- Mengecek Missing Value. 
-  Namun dataset ini tidak memiliki missing value.
-
-## Modeling
-
-Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan **Exploratory Data Analysis** **_(EDA)_** dengan dua cara, yakni Univariate dan Multivariate Analysis.
+Kemudian terdapat juga **Exploratory Data Analysis** **_(EDA)_** dengan dua cara, yakni Univariate dan Multivariate Analysis (Catatan : Data dianalisis setelah fitur-fitur terbaik ditentukan).
 
 ### Univariate Analysis
 
@@ -147,7 +130,7 @@ Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan
     
     ![Plot variabel](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/multivariate.JPG)
     
-    Nilai korelasinya dapat dilihat pada tabel berikut.
+    Terakhir nilai korelasi tiap fitur terhadap kolom `price` dapat dilihat pada tabel berikut.
     
     *ps : Hasil ini tidak akan selalu sama*.
     
@@ -155,9 +138,30 @@ Setelah melakukan pra-pemrosesan data yang baik, selanjutnya kita akan melakukan
     - Dari tabel korelasi diatas, dapat dilihat bahwa `sqft_living` mempunyai hubungan linear positif yang sangat kuat dengan `price` jika dibandingkan yang lain.
     - Nilai korelasi `yr_built` hampir mendekati nol yang menandakan bahwa usia rumah tidak mempengaruhi pada harga rumah.
 
-## Evaluation
+## Data Preparation
 
-Seperti yang sudah dijelaskan pada tab [Solution statements](#solution-statements), pada proyek ini model yang dibuat merupakan kasus prediksi dan menggunakan algoritma **Multiple Linear Regression**. Pada gambar dibawah ini ditampilkan kembali formula dari Multiple Linear Regression / Regresi Linear Berganda.
+Berikut adalah tahapan-tahapan dalam melakukan pra-pemrosesan data :
+
+- Dari hasil pengamatan data, dataset ini memiliki banyak kolom tambahan tentang sebuah rumah dan ada beberapa kolom yang kurang berkolerasi dengan kolom `harga`. Jadi, kita hanya pakai kolom `bedrooms`, `bathrooms`, `sqft_living`, `grade`, `price`, dan `yr_built` untuk digunakan sebagai kumpulan fitur terbaiknya.
+
+- Merubah tipe data. 
+  Dari hasil statistical description, dapat diketahui bahwa pada kolom `bathrooms` memiliki nilai pecahan, hal ini sangat aneh jika suatu rumah memiliki jumlah kamar mandi pecahan. Maka tipe datanya diubah dari `float` menjadi `int`.
+
+- Memodifikasi nilai. 
+  Pada kolom `bedrooms` terdapat nilai 33, hal ini sangat aneh karena sebuah rumah pribadi tidak mungkin ada yang mempunyai jumlah kamar 33. Hal ini kemungkinan terjadi karena kesalahan pada saat menginput nilai (typo), jadi kita akan ganti menjadi 3.
+
+- Mengecek Missing Value.
+
+  ![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
+  
+  Namun dataset ini tidak memiliki missing value.
+
+- Melakukan **pembagian dataset** menjadi dua bagian dengan rasio 80% untuk data latih dan 20% untuk data uji.
+  Pada saat pemodelan, kita perlu melakukan pembagian dataset kedalam dua atau tiga bagian. Pada proyek ini dilakukan dua bagian saja yakni pada data latih dan data uji dengan rasio 80:20. Data latih dilakukan sepenuhnya untuk melatih model, sedangkan data uji merupakan data yang belum pernah dilihat oleh model dan diharapkan model dapat memiliki performa yang sama baiknya pada data uji seperti pada data latih. Pada bagian ini dipastikan juga pembagian label kategorikal haruslah sama banyak pada data latih dan data uji. Pembagian dataset dilakukan dengan modul [train_test_split](https://scikit-learn.org/0.24/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split) dari scikit-learn.
+
+## Modeling
+
+Setelah melakukan pra-pemrosesan data yang baik, seperti yang sudah dijelaskan pada tab [Solution statements](#solution-statements), pada proyek ini model yang dibuat merupakan kasus prediksi dan menggunakan algoritma **Multiple Linear Regression**. Pada gambar dibawah ini ditampilkan kembali formula dari Multiple Linear Regression / Regresi Linear Berganda.
 
 ![Rumus Multiple Linear Regression](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/rumusmlr.JPG)
 
@@ -193,7 +197,9 @@ coef = pd.DataFrame(coef_dict, columns=['features', 'coef_value'])
 coef
 ```
 
-Hasilnya sebagai berikut.
+## Evaluation
+
+Setelah kita menjalankan kode yang ada pada tab [Modeling](#modeling), hasilnya akan seperti berikut.
 
 ![Dataframe MLR](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/dataframe.JPG)
 
