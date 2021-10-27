@@ -216,9 +216,7 @@ Hasilnya seperti berikut.
 
 ![R Squared Skor](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/akurasi.JPG)
 
-Kode <code>lin_reg.score()</code> diatas tadi me-return metrik R² score. **Metrik R² score** juga disebut sebagai _koefisien determinasi_ yang menjelaskan angka yang berkisar antara 0 sampai 1 yang mengindikasikan besarnya kombinasi variabel independen secara bersama – sama mempengaruhi nilai variabel dependen. Semakin mendekati angka satu, model yang dikeluarkan oleh regresi tersebut akan semakin baik.
-
-_Metrik R² score_ dirumuskan sebagai berikut.
+Kode <code>lin_reg.score()</code> diatas tadi me-return metrik R² score. **Metrik R² score** juga disebut sebagai _koefisien determinasi_ yang menjelaskan angka yang berkisar antara 0 sampai 1 yang mengindikasikan besarnya kombinasi variabel independen secara bersama – sama mempengaruhi nilai variabel dependen. Semakin mendekati angka satu, model yang dikeluarkan oleh regresi tersebut akan semakin baik. Metrik R² score dirumuskan sebagai berikut.
 
 ![R Squared Skor](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/metrik.JPG)
 
