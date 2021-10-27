@@ -207,16 +207,36 @@ Dari nilai m dan b diatas, kalau dimasukan ke dalam rumus menjadi:
 
 Y = -49110.86x1 + 62897.89x2 + 183.65x3 + 131451.54x4 - 4075.54x5 + 7217062
 
-Kemudian, kita cari tahu accuracy score dari model kita menggunakan testing data yang sudah displit. Gunakan kode berikut.
+Kemudian, kita cari tahu metrik R Squared score dari model kita menggunakan testing data yang sudah displit. Gunakan kode berikut.
 ```
 lin_reg.score(x_test, y_test)
 ```
 
 Hasilnya seperti berikut.
 
-![Skor Akurasi](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/akurasi.JPG)
+![R Squared Skor](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/akurasi.JPG)
 
-Model kita mendapatkan accuracy score sebesar 61.01%
+Kode <code>lin_reg.score()</code> diatas tadi me-return metrik R² score. **Metrik R² score** juga disebut sebagai _koefisien determinasi_ yang menjelaskan angka yang berkisar antara 0 sampai 1 yang mengindikasikan besarnya kombinasi variabel independen secara bersama – sama mempengaruhi nilai variabel dependen. Semakin mendekati angka satu, model yang dikeluarkan oleh regresi tersebut akan semakin baik.
+
+_Metrik R² score_ dirumuskan sebagai berikut.
+
+![R Squared Skor](https://raw.githubusercontent.com/samuelpakpahan20/prediksihargarumah/master/images/metrik.JPG)
+
+*Keterangan:*
+
+*n = jumlah dataset*
+
+*yi = nilai sebenarnya*
+
+*ŷi = nilai prediksi*
+
+*ȳ = nilai rata-rata*
+
+Jika kita perhatikan rumus R² diatas sangat dipengaruhi oleh nilai Y prediksi atau nilai Y dari hasil rumus dengan nilai Y sebenarnya. Kenyataan yang sering muncul adalah nilai R² akan semakin membaik (nilainya akan terus mendekati nilai 1) jika kita menambah variabel. Semakin banyak jumlah variabel yang menentukan nilai Y prediksi, maka semakin besar nilai R².
+
+Sifat R² yang akan semakin baik jika menambah variabel inilah yang menjadi kelemahan dari R² itu sendiri. Semakin banyak variabel independen yang digunakan maka akan semakin banyak _noise_ dalam model tersebut dan ini tidak dapat dijelaskan oleh R².
+
+Dari hasil diatas tadi, R² kita bernilai 0.61, berarti 61% sebaran variabel dependen dapat dijelaskan oleh variabel independen. Sisanya 39% tidak dapat dijelaskan oleh variabel independen atau dapat dijelaskan oleh variabel diluar variabel independen (komponen error). Sehingga tidak aneh jika nilai R² kecil, artinya komponen error yang besar.
 
 Terakhir mari kita prediksi harga rumah sesuai dengan permintaan seseorang, sebut saja namanya Samuel dengan kriteria sebagai berikut:
 - bedrooms = 3
